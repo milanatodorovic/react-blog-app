@@ -1,63 +1,39 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
-
-/*rgb(230, 221, 221)*/
-body {
+.div {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: #fff;
-  /* margin-top: 100px;*/
-}
-
-nav {
-  display: flex;
-  flex-direction: row;
-
-  justify-content: right;
-  background-color: rgba(119, 135, 255, 1);
-}
-.a {
-  text-decoration: none;
-  color: #fff;
-  margin: 30px;
-  font-size: 20px;
-}
-
-.a:hover {
-  color: rgba(163, 173, 255, 1);
-  cursor: pointer;
-}
-
-.a::after {
-  color: #fff;
-}
-
-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 60vh;
-  margin-top: 30px;
-  color: #fff;
-  margin-bottom: 0;
-  background: rgba(119, 135, 255, 1);
-}
-
-footer h1 {
-  font-size: 40px;
-  margin: 40px;
-}
-.newsletter {
-  display: flex;
-  flex-direction: row;
-  margin-left: 40px;
   align-items: center;
+  /* height: 100vh;*/
+
+  margin-left: 40px;
+  margin-top: 50px;
 }
 
-.newsletter input {
-  display: block;
-  width: 400px;
+.h1 {
+  color: rgba(119, 135, 255, 1);
+  font-size: 50px;
+  text-align: center;
+}
+.h2 {
+  color: rgba(119, 135, 255, 1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+}
+
+.form label {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+
+.input {
+  width: 180px;
+
+  margin-left: 20px;
+
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -69,6 +45,38 @@ footer h1 {
   border-radius: 7px;
 }
 
+.header {
+  height: 50px;
+
+  margin-left: 20px;
+
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 7px;
+}
+
+.content {
+  height: 100px;
+  margin-left: 20px;
+
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 7px;
+}
+
+/* CSS */
 .button {
   align-items: center;
   background-color: #0a66c2;
@@ -88,7 +96,7 @@ footer h1 {
 
   width: 120px;
   height: 35px;
-
+  margin-top: 30px;
   margin-left: 15px;
   overflow: hidden;
   padding: 0px;
@@ -119,14 +127,4 @@ footer h1 {
   cursor: not-allowed;
   background: rgba(0, 0, 0, 0.08);
   color: rgba(0, 0, 0, 0.3);
-}
-
-.privacy-policy {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin: 10px;
-}
-.privacy-policy a {
-  margin-left: 10px;
 }

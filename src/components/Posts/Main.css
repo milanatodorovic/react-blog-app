@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Lora&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+.title {
+  font-family: "Libre Baskerville", serif;
+  color: black;
+  width: 900px;
+
+  margin-top: 0px;
+}
+
+.post-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.single-post {
+  margin-left: 20px;
+  margin-top: 30px;
+}
+.single-post p {
+  font-family: "Montserrat", sans-serif;
+  width: 700px;
+  color: #888;
+}
+
+.button-48 {
+  appearance: none;
+  background-color: rgba(119, 135, 255, 1);
+  border-width: 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Clarkson, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 1em 2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-48:before {
+  animation: opacityFallbackOut 0.5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: rgb(81, 98, 226);
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+.button-48:hover:before {
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.button-48:after {
+  background-color: #ffffff;
+}
+
+.text {
+  z-index: 1;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ReactionRed {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.ReactionRed button {
+  margin-right: 30px;
+  width: 50px;
+  height: 40px;
+  border-color: white;
+  background-color: white;
+  border-style: none;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ReactionRed button img {
+  width: 100%;
+}
+
+.ReactionRed button span {
+  font-family: "Montserrat", sans-serif;
+  margin-left: 10px;
+  font-size: large;
+}
+
+.InfoRed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.users {
+  font-family: "Montserrat", sans-serif;
+}
+.single-post-compt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.single-post-compt h1 {
+  font-family: "Libre Baskerville", serif;
+  color: black;
+  width: 900px;
+  text-align: center;
+  margin: 40px;
+}
+
+.single-post-compt p {
+  font-family: "Montserrat", sans-serif;
+  margin-left: 40px;
+  margin-right: 40px;
+  text-align: left;
+  color: rgb(129, 129, 129);
+}
+.span-div {
+  margin-bottom: 130px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 94%;
+}
+.span-div span {
+  font-family: "Montserrat", sans-serif;
+  text-align: left;
+  color: #999;
+}
+.user-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-bottom: 0;
+
+  color: #999;
+}
+.user-time span {
+  margin-right: 10px;
+}
+.posts-h1 {
+  color: rgba(119, 135, 255, 1);
+  margin-top: 60px;
+  font-size: 50px;
+  text-align: center;
+  line-height: 45px;
+  margin-bottom: 70px;
+}
