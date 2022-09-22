@@ -51,6 +51,7 @@ const SinglePost = (props) => {
               {post.body}
               {post.body}
               {post.body}
+              {/*Pozivam vise puta zbog izgleda */}
             </p>
 
             <div className="span-div">

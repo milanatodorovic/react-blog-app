@@ -65,17 +65,6 @@ const Post = (props) => {
       //console.log(response);
 
       setUsers(response.data[userId].name);
-      /* const usersWithDateData = response.data[userId].map((item) => ({
-        ...item,
-        date: "25. September 2022.",
-        reactions: {
-          happy: 0,
-          sad: 0,
-          confused: 0,
-          angry: 0,
-        },
-      }));
-      setUsersWithDate(usersWithDateData);*/
     } catch (error) {
       // console.log(error);
       console.log("greska u catchu");
@@ -85,7 +74,6 @@ const Post = (props) => {
   fetchUsersHandler();
 
   const { userId } = props;
-  // const { usersApiId } = props;
 
   return (
     <>
