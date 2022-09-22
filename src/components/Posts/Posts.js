@@ -12,8 +12,18 @@ const Posts = (props) => {
     try {
       const response = await axiosInstance.get("/posts?_limit=100");
       // console.log(response);
-
-      setPosts(response.data);
+      const postsWithDate = response.data.map((item) => ({
+        ...item,
+        date: "25. September 2022.",
+        reactions: {
+          happy: 0,
+          sad: 0,
+          confused: 0,
+          angry: 0,
+        },
+      }));
+      // setPosts(response.data);
+      setPosts(postsWithDate);
     } catch (error) {
       //console.log(error);
       //console.log("greska u catchu");
@@ -21,17 +31,6 @@ const Posts = (props) => {
   };
 
   fetchPostsHandler();
-
-  const postsWithDate = posts.map((item) => ({
-    ...item,
-    date: "25. September 2022.",
-    reactions: {
-      happy: 0,
-      sad: 0,
-      confused: 0,
-      angry: 0,
-    },
-  }));
 
   return (
     <>
@@ -52,7 +51,6 @@ const Posts = (props) => {
             userId={item.userId}
             date={item.date}
             reactions={item.reactions}
-            postsWithDate={postsWithDate}
           />
         ))}
       </div>

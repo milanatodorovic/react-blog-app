@@ -81,7 +81,7 @@ const Post = (props) => {
         <div className="single-post">
           <div className="user-time">
             <span className="user"> {users}</span>
-            <span className="time">Datum: </span>
+            <span className="time">Datum: {props.date}</span>
           </div>
 
           <h1 className="title">{props.title}</h1>
