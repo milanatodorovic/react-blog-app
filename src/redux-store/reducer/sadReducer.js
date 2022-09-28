@@ -1,4 +1,4 @@
-const sadReducer = (state = { sad: 0 }, action) => {
+/*const sadReducer = (state = { sad: 0 }, action) => {
   switch (action.type) {
     case "SAD":
       return {
@@ -10,3 +10,4 @@ const sadReducer = (state = { sad: 0 }, action) => {
   }
 };
 export default sadReducer;
+*/

@@ -16,7 +16,8 @@ import {
 } from "../../redux-store/action/index";
 
 const Post = (props) => {
-  const happy = useSelector((state) => state.happyReducer.happy);
+  const [post, setPost] = useState([]);
+  /* const happy = useSelector((state) => state.happyReducer.happy);
   const angry = useSelector((state) => state.angryReducer.angry);
   const confused = useSelector((state) => state.confusedReducer.confused);
   const sad = useSelector((state) => state.sadReducer.sad);
@@ -61,31 +62,20 @@ const Post = (props) => {
 */
   const fetchUsersHandler = async () => {
     try {
-      const response = await axiosInstance.get("/users?_limit=100");
+      const response = await axiosInstance.get("/users");
       //console.log(response);
 
       setUsers(response.data[userId].name);
-      /* const usersWithDateData = response.data[userId].map((item) => ({
-        ...item,
-        date: "25. September 2022.",
-        reactions: {
-          happy: 0,
-          sad: 0,
-          confused: 0,
-          angry: 0,
-        },
-      }));
-      setUsersWithDate(usersWithDateData);*/
     } catch (error) {
       // console.log(error);
-      console.log("greska u catchu");
+      // console.log("greska u catchu");
     }
   };
 
   fetchUsersHandler();
 
   const { userId } = props;
-  // const { usersApiId } = props;
+  //const { id } = props;
 
   return (
     <>
@@ -93,7 +83,7 @@ const Post = (props) => {
         <div className="single-post">
           <div className="user-time">
             <span className="user"> {users}</span>
-            <span className="time">Datum: </span>
+            <span className="time">{props.date}</span>
           </div>
 
           <h1 className="title">{props.title}</h1>
@@ -106,19 +96,19 @@ const Post = (props) => {
             </button>
           </div>
           <div className="ReactionRed">
-            <button onClick={incrementHappyHandler}>
+            <button /*onClick={incrementHappyHandler}*/>
               <img src={happyGif} alt="happy" />
-              <span>{happy}</span>
+              <span>{}</span>
             </button>
-            <button onClick={incrementSadHandler}>
-              <img src={cryingGif} alt="sad" /> <span>{sad}</span>
+            <button /*onClick={incrementSadHandler}*/>
+              <img src={cryingGif} alt="sad" /> <span>{}</span>
             </button>
-            <button onClick={incrementConfusedHandler}>
-              <img src={silentGif} alt="silent" /> <span>{confused}</span>
+            <button /*onClick={incrementConfusedHandler}*/>
+              <img src={silentGif} alt="silent" /> <span>{}</span>
             </button>
-            <button onClick={incrementAngryHandler}>
+            <button /*onClick={incrementAngryHandler}*/>
               <img src={confusedGif} alt="sad" />
-              <span> {angry}</span>
+              <span> {}</span>
             </button>
           </div>
         </div>

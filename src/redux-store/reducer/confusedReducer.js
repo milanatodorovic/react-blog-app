@@ -1,4 +1,4 @@
-const confusedReducer = (state = { confused: 0 }, action) => {
+/*const confusedReducer = (state = { confused: 0 }, action) => {
   switch (action.type) {
     case "CONFUSED":
       return {
@@ -11,3 +11,4 @@ const confusedReducer = (state = { confused: 0 }, action) => {
 };
 
 export default confusedReducer;
+*/

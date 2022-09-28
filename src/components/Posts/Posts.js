@@ -1,37 +1,71 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { axiosInstance } from "../../api/axios";
 import Post from "./Post";
 import "./Main.css";
 import LandingPage from "../LandingPage/LandingPage";
+import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuid } from "uuidv4";
+import { SetAllPosts } from "../../redux-store/action/index";
 
 const Posts = (props) => {
-  const [posts, setPosts] = useState([]);
+  /* const [posts, setPosts] = useState(getPosts());
+  const happy = useSelector((state) => state.happyReducer.happy);
+  const angry = useSelector((state) => state.angryReducer.angry);
+  const confused = useSelector((state) => state.confusedReducer.confused);
+  const sad = useSelector((state) => state.sadReducer.sad);*/
+  const posts = useSelector((state) => state.initialState.posts);
+  const dispatch = useDispatch();
 
   const fetchPostsHandler = async () => {
     try {
       const response = await axiosInstance.get("/posts?_limit=100");
       // console.log(response);
-
-      setPosts(response.data);
+      const postsWithDate = response.data.map((item) => ({
+        ...item,
+        date: "25. September 2022.",
+        reactions: 0,
+      }));
     } catch (error) {
       //console.log(error);
-      //console.log("greska u catchu");
+      console.log("greska u catchu");
     }
   };
 
-  fetchPostsHandler();
+  const storeFetchPostsHandler = () => {
+    dispatch(SetAllPosts(posts));
+  };
+  //fetchPostsHandler();
+  /*
+  //local storage
+  function getPosts() {
+    //getting stored items
 
-  const postsWithDate = posts.map((item) => ({
-    ...item,
-    date: "25. September 2022.",
-    reactions: {
-      happy: 0,
-      sad: 0,
-      confused: 0,
-      angry: 0,
-    },
-  }));
+    const temp = localStorage.getItem("posts");
+    const savedPosts = JSON.parse(temp);
+    return savedPosts || [];
+  }
+  useEffect(() => {
+    //storing todo items
+
+    const temp = JSON.stringify(posts);
+    localStorage.setItem("posts", temp);
+  }, [posts]);
+
+  //adding posts to the API data
+  const addNewPosts = (name, email, header, content) => {
+    const newPost = {
+      id: uuid(),
+      name: name,
+      header: header,
+      content: content,
+      email: email,
+    };
+
+    setPosts([...posts, newPost]);
+  };*/
+
+  /* props.fetchPostsHandler();*/
 
   return (
     <>
@@ -52,7 +86,6 @@ const Posts = (props) => {
             userId={item.userId}
             date={item.date}
             reactions={item.reactions}
-            postsWithDate={postsWithDate}
           />
         ))}
       </div>

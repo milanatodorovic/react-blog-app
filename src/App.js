@@ -5,19 +5,85 @@ import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import NewPost from "./components/newPost/NewPost";
 import SinglePost from "./components/SinglePost";
 import Posts from "./components/Posts/Posts";
+import { uuid } from "uuidv4";
+import { axiosInstance } from "./api/axios";
 
 function App(props) {
-  /* const [postNew, setPostNew] = useState([]);
-  const addPost = (header, content, username) => {
+  /*const [posts, setPosts] = useState(getPosts());
+  const happy = useSelector((state) => state.happyReducer.happy);
+  const angry = useSelector((state) => state.angryReducer.angry);
+  const confused = useSelector((state) => state.confusedReducer.confused);
+  const sad = useSelector((state) => state.sadReducer.sad);
+
+  const fetchPostsHandler = async () => {
+    try {
+      const response = await axiosInstance.get("/posts?_limit=100");
+      // console.log(response);
+      const postsWithDate = response.data.map((item) => ({
+        ...item,
+        date: "25. September 2022.",
+        reactions: {
+          happy: { happy },
+          sad: { sad },
+          confused: { confused },
+          angry: { angry },
+        },
+      }));
+      setPosts(postsWithDate);
+      console.log(posts);
+    } catch (error) {
+      //console.log(error);
+      //console.log("greska u catchu");
+    }
+  };
+
+  //local storage
+  function getPosts() {
+    //getting stored items
+
+    const temp = localStorage.getItem("posts");
+    const savedPosts = JSON.parse(temp);
+    return savedPosts || [];
+  }
+  useEffect(() => {
+    const temp = JSON.stringify(posts);
+    localStorage.setItem("posts", temp);
+  }, [posts]);
+  /*
+  //adding posts to the API data
+  const addNewPosts = (name, email, header, content) => {
     const newPost = {
-      id: uuidv4(),
+      id: uuid(),
+      name: name,
       header: header,
       content: content,
-      username: username,
+      email: email,
     };
 
-    setPostNew([...postNew, newPost]);
-  };*/
+    setPosts([...posts, newPost]);
+  };
+  /*
+  const DeletePostHandler = (id) => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((response) => {
+        fetchPostsHandler();
+      });
+    });
+  };
+
+  useEffect(() => {
+    DeletePostHandler();
+  }, []);
+
+  const DeletePostHandler = () => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    }).then(() => console.log("Delete successful"));
+  };
+*/
+
   return (
     <BrowserRouter>
       <nav>
@@ -31,13 +97,29 @@ function App(props) {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Posts />}></Route>
-        <Route path="/posts" element={<Posts />}></Route>
+        <Route
+          path="/"
+          element={
+            <Posts /*fetchPostsHandler={fetchPostsHandler} posts={posts}*/ />
+          }
+        ></Route>
+        <Route
+          path="/posts"
+          element={
+            <Posts /*fetchPostsHandler={fetchPostsHandler} posts={posts}*/ />
+          }
+        ></Route>
         <Route
           path="/newpost"
-          element={<NewPost /*addPost={addPost}*/ />}
+          element={<NewPost /*addNewPosts={addNewPosts}*/ />}
         ></Route>
-        <Route path="/posts/:id" element={<SinglePost />} />
+        <Route
+          path="/posts/:id"
+          element={
+            <SinglePost /*fetchPostsHandler={fetchPostsHandler} posts={posts}*/
+            />
+          }
+        />
       </Routes>
       <div className="App">
         <footer>

@@ -1,4 +1,4 @@
-const happyReducer = (state = { happy: 0 }, action) => {
+/*const happyReducer = (state = { happy: 0 }, action) => {
   switch (action.type) {
     case "HAPPY":
       return {
@@ -11,3 +11,4 @@ const happyReducer = (state = { happy: 0 }, action) => {
 };
 
 export default happyReducer;
+*/

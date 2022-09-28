@@ -1,36 +1,36 @@
 import style from "../newPost/NewPost.module.css";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 const NewPost = (props) => {
-  const [header, setHeader] = useState("");
+  /*const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const headerRef = useRef();
   const contentRef = useRef();
   const usernameRef = useRef();
 
-  /*const formSubmitHandler = (e) => {
-    const onChangeHeader = (e) => {
-      e.preventDefault();
-      setHeader(...header, headerRef.current.target.value);
-    };
-    const onChangeContent = (e) => {
-      setContent(...content, contentRef.current.target.value);
-    };
-    const onChangeUsername = (e) => {
-      setUsername(...username, usernameRef.current.target.value);
-    };
+  const onChangeHeader = (e) => {
+    setHeader(e.target.value);
   };
-  /* const formSubmitHandler = (e) => {
+  const onChangeUsername = (e) => {
+    setUsername(e.target.value);
+  };
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const formSubmitHandler = (e) => {
     e.preventDefault();
-    if ((header, content, username)) {
-      props.addPost(header, content, username);
-      /* setHeader("");
-      setContent("");
-      setUsername("");
+    if (header.trim()) {
+      props.addTodoProps(header);
+      setHeader("");
     } else {
       alert("Please write item");
     }
-    console.log(header, content, username);
   };
 */
   return (
@@ -48,9 +48,10 @@ const NewPost = (props) => {
             type="text"
             placeholder="Text here..."
             className={style.input}
-            value={username}
+            name="username"
+            /* value={username}
             ref={usernameRef}
-            //onChange={onChangeUsername}
+            onChange={onChangeUsername}*/
           />
 
           <label>E-mail</label>
@@ -58,6 +59,8 @@ const NewPost = (props) => {
             type="email"
             placeholder="Email here..."
             className={style.input}
+            /* value={email}
+            onChange={onChangeEmail}*/
           />
 
           <h2 className={style.h2}>Write your post here:</h2>
@@ -66,18 +69,19 @@ const NewPost = (props) => {
             type="text"
             placeholder="Header here..."
             className={style.header}
-            ref={headerRef}
+            /* ref={headerRef}
             value={header}
-            //   onChange={onChangeHeader}
+            onChange={onChangeHeader}*/
+            name="header"
           />
           <label>Content</label>
           <input
             type="text"
             placeholder="Content here..."
             className={style.content}
-            ref={contentRef}
+            /* ref={contentRef}
             value={content}
-            //   onChange={onChangeContent}
+            onChange={onChangeContent}*/
           />
 
           <button
@@ -85,7 +89,7 @@ const NewPost = (props) => {
             /* onClick={formSubmitHandler}*/
             className={style.button}
           >
-            Post Now
+            <Link to="/posts">Post Now</Link>
           </button>
         </form>
       </div>

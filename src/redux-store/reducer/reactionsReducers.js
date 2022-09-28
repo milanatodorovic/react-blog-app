@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+/*import { combineReducers } from "redux";
 import happyReducer from "./happyReducer";
 import sadReducer from "./sadReducer";
 import angryReducer from "./angryReducer";
@@ -11,3 +11,4 @@ const allReactionsReducers = combineReducers({
 });
 
 export default allReactionsReducers;
+*/

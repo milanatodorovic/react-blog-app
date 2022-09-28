@@ -4,9 +4,10 @@ import { axiosInstance } from "../api/axios";
 import "./Posts/Main.css";
 const SinglePost = (props) => {
   const { id } = useParams();
-  const [post, setPost] = useState(null);
-  const [user, setUser] = useState(null);
-
+  const [post, setPost] = useState([]);
+  const [user, setUser] = useState([]);
+  const [view, setView] = useState(true);
+  console.log(post.id);
   useEffect(() => {
     const fetchBody = async () => {
       try {
@@ -31,10 +32,47 @@ const SinglePost = (props) => {
     fetchUser();
   }, [id]);
 
+  /* const DeletePostHandler = (id) => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((response) => {
+        fetchBody();
+      });
+    });
+  };
+*/
+  /*  useEffect(() => {
+    deleteHandler();
+  });
+
+  const deleteHandler = () => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    });
+    setView(false);
+    return <p>This post has been deleted.</p>;
+  };
+  console.log(view);
+  */
+  const deleteHandler = () => {
+    setView(false);
+    return <p>This post has been deleted.</p>;
+  };
+
+  /* const deleteHandler = (id) => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    }).then((result) =>{
+      result.json().then((resp)=>{
+        console.warn(resp)
+      })
+    })*/
+
   return (
     <>
       <div className="single-post-compt">
-        {post !== null ? (
+        {view === true && post !== null ? (
           <>
             <h1>{post.title}</h1>
 
@@ -57,9 +95,11 @@ const SinglePost = (props) => {
               <span>{user.name}-</span>
               <span>{user.email}</span>
             </div>
+
+            <button onClick={deleteHandler}>Delete</button>
           </>
         ) : (
-          <p>No post </p>
+          <p>This post has been deleted. </p>
         )}
       </div>
     </>

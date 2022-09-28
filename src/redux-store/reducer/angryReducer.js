@@ -1,4 +1,4 @@
-const angryReducer = (state = { angry: 0 }, action) => {
+/*const angryReducer = (state = { angry: 0 }, action) => {
   switch (action.type) {
     case "ANGRY":
       return {
@@ -11,3 +11,4 @@ const angryReducer = (state = { angry: 0 }, action) => {
 };
 
 export default angryReducer;
+*/
