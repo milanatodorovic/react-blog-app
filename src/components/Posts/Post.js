@@ -9,19 +9,81 @@ import axiosInstance from "../../api/axios";
 import "./Main.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  happyIncrement,
-  sadIncrement,
-  angryIncrement,
-  confusedIncrement,
+  INCREMENT_ANGRY,
+  INCREMENT_HAPPY,
+  INCREMENT_CONFUSED,
+  INCREMENT_SAD,
 } from "../../redux-store/action/index";
 
 const Post = (props) => {
-  const [post, setPost] = useState([]);
-  /* const happy = useSelector((state) => state.happyReducer.happy);
-  const angry = useSelector((state) => state.angryReducer.angry);
+  //const [post, setPost] = useState([]);
+  const [users, setUsers] = useState([]);
+  const happy = useSelector((state) => state.reactions.happy);
+  const angry = useSelector((state) => state.reactions.angry);
+  const confused = useSelector((state) => state.reactions.confused);
+  const sad = useSelector((state) => state.reactions.sad);
+  const id = useSelector((state) => state.posts.id);
+  const dispatch = useDispatch();
+  const incrementHappyHandler = () => {
+    dispatch({
+      type: INCREMENT_HAPPY,
+      payload: {
+        postId: id,
+        reaction: happy,
+      },
+    });
+  };
+
+  const incrementSadHandler = () => {
+    dispatch({
+      type: INCREMENT_SAD,
+      payload: {
+        postId: id,
+        reaction: sad,
+      },
+    });
+  };
+
+  const incrementAngryHandler = () => {
+    dispatch({
+      type: INCREMENT_ANGRY,
+      payload: {
+        postId: id,
+        reaction: angry,
+      },
+    });
+  };
+
+  const incrementConfusedHandler = () => {
+    dispatch({
+      type: INCREMENT_CONFUSED,
+      payload: {
+        postId: id,
+        reaction: confused,
+      },
+    });
+  };
+
+  const fetchUsersHandler = async () => {
+    try {
+      const response = await axiosInstance.get("/users");
+      //console.log(response);
+
+      setUsers(response.data[userId].name);
+    } catch (error) {
+      // console.log(error);
+      // console.log("greska u catchu");
+    }
+  };
+
+  fetchUsersHandler();
+
+  const { userId } = props;
+
+  /* const angry = useSelector((state) => state.angryReducer.angry);
   const confused = useSelector((state) => state.confusedReducer.confused);
   const sad = useSelector((state) => state.sadReducer.sad);
-  const dispatch = useDispatch();
+ 
   const incrementHappyHandler = () => {
     dispatch(happyIncrement());
   };
@@ -41,7 +103,7 @@ const Post = (props) => {
   const [incrementConfused, setIncrementConfused] = useState(null);
   const [incrementHappy, setIncrementHappy] = useState(null);
   const [incrementSad, setIncrementSad] = useState(null);*/
-  const [users, setUsers] = useState([]);
+
   //const [usersWithDate, setUsersWithDate] = useState([]);
   /*const incrementHappyHandler = (e) => {
     e.preventDefault();
@@ -60,21 +122,6 @@ const Post = (props) => {
     setIncrementConfused(incrementConfused + 1);
   };
 */
-  const fetchUsersHandler = async () => {
-    try {
-      const response = await axiosInstance.get("/users");
-      //console.log(response);
-
-      setUsers(response.data[userId].name);
-    } catch (error) {
-      // console.log(error);
-      // console.log("greska u catchu");
-    }
-  };
-
-  fetchUsersHandler();
-
-  const { userId } = props;
   //const { id } = props;
 
   return (
@@ -96,19 +143,19 @@ const Post = (props) => {
             </button>
           </div>
           <div className="ReactionRed">
-            <button /*onClick={incrementHappyHandler}*/>
+            <button onClick={incrementHappyHandler}>
               <img src={happyGif} alt="happy" />
-              <span>{}</span>
+              <span>{happy}</span>
             </button>
-            <button /*onClick={incrementSadHandler}*/>
-              <img src={cryingGif} alt="sad" /> <span>{}</span>
+            <button onClick={incrementSadHandler}>
+              <img src={cryingGif} alt="sad" /> <span>{sad}</span>
             </button>
-            <button /*onClick={incrementConfusedHandler}*/>
-              <img src={silentGif} alt="silent" /> <span>{}</span>
+            <button onClick={incrementAngryHandler}>
+              <img src={silentGif} alt="silent" /> <span>{angry}</span>
             </button>
-            <button /*onClick={incrementAngryHandler}*/>
+            <button onClick={incrementConfusedHandler}>
               <img src={confusedGif} alt="sad" />
-              <span> {}</span>
+              <span> {confused}</span>
             </button>
           </div>
         </div>

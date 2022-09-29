@@ -24,6 +24,10 @@ export const angryIncrement = () => {
 */
 
 export const SET_ALL_POSTS = "SET_ALL_POSTS";
+export const INCREMENT_HAPPY = "INCREMENT_HAPPY";
+export const INCREMENT_SAD = "INCREMENT_SAD";
+export const INCREMENT_ANGRY = "INCREMENT_ANGRY";
+export const INCREMENT_CONFUSED = "INCREMENT_CONFUSED";
 
 export const SetAllPosts = () => {
   try {
@@ -54,40 +58,14 @@ export const SetAllPosts = () => {
     console.log("greska u catchu");
   }
 };
-
 /*
-import axiosInstance from "../../api/axios";
-export const SET_ALL_POSTS = "SET_ALL_POSTS";
-
-export const SetAllPosts = async (dispatch) => {
-  try {
-    const response = await axiosInstance.get("/posts?_limit=100");
-    // console.log(response);
-    const postsWithDate = response.data.map((item) => ({
-      ...item,
-      date: "25. September 2022.",
-      reactions: 0,
-    }));
-
-    if (postsWithDate) {
-      dispatch({
-        type: SET_ALL_POSTS,
-        payload: postsWithDate,
-      });
-    } else {
-      console.log("nije se fetchovalo");
-    }
-  } catch (error) {
-    //console.log(error);
-    console.log("greska u catchu");
-  }*/
-/*
-export const SET_ALL_POSTS = "SET_ALL_POSTS";
-
-export const SetAllPosts = (fetchedPosts) => {
+export const incrementHappy = (n) => {
   return {
-    type: "SET_ALL_POSTS",
-    payload: fetchedPosts,
+    type: "INCREMENT_HAPPY",
+    payload: {
+      postId: id,
+      reaction: happy,
+    },
   };
 };
 */

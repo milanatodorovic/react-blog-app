@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { /*useState,*/ useEffect } from "react";
 
-import { axiosInstance } from "../../api/axios";
 import Post from "./Post";
 import "./Main.css";
 import LandingPage from "../LandingPage/LandingPage";
 import { useSelector, useDispatch } from "react-redux";
-import { v4 as uuid } from "uuidv4";
-import { SetAllPosts } from "../../redux-store/action/index";
+//import { v4 as uuid } from "uuidv4";
+import { SET_ALL_POSTS } from "../../redux-store/action/index";
 
 const Posts = (props) => {
   /* const [posts, setPosts] = useState(getPosts());
@@ -66,12 +65,40 @@ const Posts = (props) => {
 
   /* props.fetchPostsHandler();*/
 
-  const posts = useSelector((state) => state.postReducer);
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(SetAllPosts());
-  });
+    const fetchPosts = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts?_limit=100",
+        { method: "GET" }
+      );
+      const posts = await response.json();
+      const postsWithDate = posts.map((item) => ({
+        ...item,
+        date: "25. September 2022.",
+        reactions: {
+          happy: 0,
+          sad: 0,
+          angry: 0,
+          confused: 0,
+        },
+      }));
+
+      if (postsWithDate) {
+        dispatch({
+          type: SET_ALL_POSTS,
+          payload: postsWithDate,
+        });
+      } else {
+        console.log("nije se fetchovalo");
+      }
+    };
+    fetchPosts();
+  }, [dispatch]);
+
+  console.log("posts:", posts);
   return (
     <>
       <div>
@@ -82,15 +109,15 @@ const Posts = (props) => {
           posts right here!
         </h1>
 
-        {posts.map((item) => (
+        {posts.map((data) => (
           <Post
-            key={item.id}
-            title={item.title}
-            data={item.body.substring(0, 100) + "..."}
-            id={item.id}
-            userId={item.userId}
-            date={item.date}
-            reactions={item.reactions}
+            key={data.id}
+            title={data.title}
+            data={data.body.substring(0, 100) + "..."}
+            id={data.id}
+            userId={data.userId}
+            date={data.date}
+            reactions={data.reactions}
           />
         ))}
       </div>
