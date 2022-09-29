@@ -23,7 +23,7 @@ export const angryIncrement = () => {
 };
 */
 
-/*export const SET_ALL_POSTS = "SET_ALL_POSTS";
+export const SET_ALL_POSTS = "SET_ALL_POSTS";
 
 export const SetAllPosts = () => {
   try {
@@ -81,7 +81,7 @@ export const SetAllPosts = async (dispatch) => {
     //console.log(error);
     console.log("greska u catchu");
   }*/
-
+/*
 export const SET_ALL_POSTS = "SET_ALL_POSTS";
 
 export const SetAllPosts = (fetchedPosts) => {
@@ -90,3 +90,4 @@ export const SetAllPosts = (fetchedPosts) => {
     payload: fetchedPosts,
   };
 };
+*/

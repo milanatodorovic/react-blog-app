@@ -14,8 +14,7 @@ const Posts = (props) => {
   const angry = useSelector((state) => state.angryReducer.angry);
   const confused = useSelector((state) => state.confusedReducer.confused);
   const sad = useSelector((state) => state.sadReducer.sad);*/
-  const posts = useSelector((state) => state.initialState.posts);
-  const dispatch = useDispatch();
+  /*
 
   const fetchPostsHandler = async () => {
     try {
@@ -67,6 +66,12 @@ const Posts = (props) => {
 
   /* props.fetchPostsHandler();*/
 
+  const posts = useSelector((state) => state.postReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(SetAllPosts());
+  });
   return (
     <>
       <div>

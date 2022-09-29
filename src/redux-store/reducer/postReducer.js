@@ -10,7 +10,7 @@ const postReducer = (state = initalState, action) => {
     case SET_ALL_POSTS:
       return {
         ...state,
-        posts: state.initalState.posts === action.payload,
+        posts: action.payload,
       };
 
     default:
