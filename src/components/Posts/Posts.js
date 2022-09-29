@@ -99,6 +99,18 @@ const Posts = (props) => {
   }, [dispatch]);
 
   console.log("posts:", posts);
+
+  //local storage
+  function getPosts() {
+    const temp = localStorage.getItem("posts");
+    const savedPosts = JSON.parse(temp);
+    return savedPosts || [];
+  }
+  useEffect(() => {
+    const temp = JSON.stringify(posts);
+    localStorage.setItem("posts", temp);
+  }, [posts]);
+
   return (
     <>
       <div>

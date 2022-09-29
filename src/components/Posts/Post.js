@@ -22,9 +22,9 @@ const Post = (props) => {
   const angry = useSelector((state) => state.reactions.angry);
   const confused = useSelector((state) => state.reactions.confused);
   const sad = useSelector((state) => state.reactions.sad);
-  const id = useSelector((state) => state.posts.id);
+
   const dispatch = useDispatch();
-  const incrementHappyHandler = () => {
+  const incrementHappyHandler = (id) => {
     dispatch({
       type: INCREMENT_HAPPY,
       payload: {
@@ -34,7 +34,7 @@ const Post = (props) => {
     });
   };
 
-  const incrementSadHandler = () => {
+  const incrementSadHandler = (id) => {
     dispatch({
       type: INCREMENT_SAD,
       payload: {
@@ -44,7 +44,7 @@ const Post = (props) => {
     });
   };
 
-  const incrementAngryHandler = () => {
+  const incrementAngryHandler = (id) => {
     dispatch({
       type: INCREMENT_ANGRY,
       payload: {
@@ -54,7 +54,7 @@ const Post = (props) => {
     });
   };
 
-  const incrementConfusedHandler = () => {
+  const incrementConfusedHandler = (id) => {
     dispatch({
       type: INCREMENT_CONFUSED,
       payload: {
@@ -79,6 +79,10 @@ const Post = (props) => {
   fetchUsersHandler();
 
   const { userId } = props;
+
+  const topOfPage = () => {
+    window.scrollTo(0, 0);
+  };
 
   /* const angry = useSelector((state) => state.angryReducer.angry);
   const confused = useSelector((state) => state.confusedReducer.confused);
@@ -136,7 +140,7 @@ const Post = (props) => {
           <h1 className="title">{props.title}</h1>
           <p>{props.data}</p>
           <div className="InfoRed">
-            <button className="button-48">
+            <button className="button-48" onClick={topOfPage}>
               <Link to={`/posts/${props.id}`} className="text">
                 Read More
               </Link>

@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { axiosInstance } from "../api/axios";
 import "./Posts/Main.css";
+import removePost, { DELETE_POST } from "../redux-store/action/index";
 const SinglePost = (props) => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [user, setUser] = useState([]);
   const [view, setView] = useState(true);
+  const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
   console.log(post.id);
   useEffect(() => {
     const fetchBody = async () => {
@@ -55,10 +60,6 @@ const SinglePost = (props) => {
   };
   console.log(view);
   */
-  const deleteHandler = () => {
-    setView(false);
-    return <p>This post has been deleted.</p>;
-  };
 
   /* const deleteHandler = (id) => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
@@ -69,38 +70,64 @@ const SinglePost = (props) => {
       })
     })*/
 
+  const backToHomeHandler = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const deleteHandler = (id) => {
+    posts.filter((post) => {
+      return post.id !== id;
+    });
+  };
+  const deletePost = () => {
+    dispatch({
+      type: DELETE_POST,
+      payload: post.id,
+    });
+  };
+
   return (
     <>
       <div className="single-post-compt">
-        {view === true && post !== null ? (
-          <>
-            <h1>{post.title}</h1>
+        {/* {view === true && post !== null ? (*/}
+        <>
+          <h1>{post.title}</h1>
 
-            <p>
-              {post.body}
-              {post.body}
-              {post.body}
-              <br />
-              {post.body}
-              <br />
-            </p>
-            <p>
-              {post.body}
-              {post.body}
-              {post.body}
-              {post.body}
-            </p>
+          <p>
+            {post.body}
+            {post.body}
+            {post.body}
+            <br />
+            {post.body}
+            <br />
+          </p>
+          <p>
+            {post.body}
+            {post.body}
+            {post.body}
+            {post.body}
+          </p>
 
-            <div className="span-div">
-              <span>{user.name}-</span>
-              <span>{user.email}</span>
+          <div className="span-div">
+            <span>{user.name}-</span>
+            <span>{user.email}</span>
+          </div>
+
+          <div>
+            <div>
+              <button onClick={backToHomeHandler}>
+                <Link to={`/posts`}>Back to Home</Link>
+              </button>
             </div>
-
-            <button onClick={deleteHandler}>Delete</button>
-          </>
-        ) : (
-          <p>This post has been deleted. </p>
-        )}
+            <button onClick={deletePost}>Delete</button>
+            <div>
+              <button /*onClick={editHandler}*/>Edit</button>
+            </div>
+          </div>
+        </>
+        {/*) : (
+        <p className="deleteMessage">This post has been deleted. </p>
+         )}*/}
       </div>
     </>
   );

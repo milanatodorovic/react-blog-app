@@ -23,11 +23,14 @@ export const angryIncrement = () => {
 };
 */
 
+import axios from "axios";
+
 export const SET_ALL_POSTS = "SET_ALL_POSTS";
 export const INCREMENT_HAPPY = "INCREMENT_HAPPY";
 export const INCREMENT_SAD = "INCREMENT_SAD";
 export const INCREMENT_ANGRY = "INCREMENT_ANGRY";
 export const INCREMENT_CONFUSED = "INCREMENT_CONFUSED";
+export const DELETE_POST = "DELETE_POST";
 
 export const SetAllPosts = () => {
   try {
