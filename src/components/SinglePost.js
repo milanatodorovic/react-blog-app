@@ -70,9 +70,9 @@ const SinglePost = (props) => {
       })
     })*/
 
-  const backToHomeHandler = () => {
+  /* const backToHomeHandler = () => {
     window.scrollTo(0, 0);
-  };
+  };*/
 
   const deleteHandler = (id) => {
     posts.filter((post) => {
@@ -118,7 +118,7 @@ const SinglePost = (props) => {
 
           <div>
             <div>
-              <button onClick={backToHomeHandler}>
+              <button /*onClick={backToHomeHandler}*/>
                 <Link to={`/posts`}>Back to Home</Link>
               </button>
             </div>

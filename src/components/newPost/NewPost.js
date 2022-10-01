@@ -1,14 +1,15 @@
 import style from "../newPost/NewPost.module.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 const NewPost = (props) => {
-  /*const [header, setHeader] = useState("");
+  const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const headerRef = useRef();
+  /*  const headerRef = useRef();
   const contentRef = useRef();
-  const usernameRef = useRef();
+  const usernameRef = useRef();*/
 
   const onChangeHeader = (e) => {
     setHeader(e.target.value);
@@ -23,16 +24,45 @@ const NewPost = (props) => {
     setEmail(e.target.value);
   };
 
+  const [newPost, setNewPost] = useState(getNewPosts());
+
+  function getNewPosts() {
+    const temp = localStorage.getItem("newPost");
+    const savedNewPosts = JSON.parse(temp);
+    return savedNewPosts || [];
+  }
+  useEffect(() => {
+    const temp = JSON.stringify(newPost);
+    localStorage.setItem("newPost", temp);
+  }, [newPost]);
+
+  const addNewPostsHandler = ({ username, email, header, content }) => {
+    const newWritenPost = {
+      id: uuid(),
+      username: username,
+      email: email,
+      header: header,
+      content: content,
+      date: "25.9.2022.",
+    };
+
+    setNewPost([...newPost, newWritenPost]);
+  };
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (header.trim()) {
-      props.addTodoProps(header);
+    if ((username, email, header, content)) {
+      addNewPostsHandler({ username, email, header, content });
       setHeader("");
+      setUsername("");
+      setEmail("");
+      setContent("");
+      console.log("pojedinacno:", username, email, header, content);
+      console.log("newPost state:", newPost);
     } else {
-      alert("Please write item");
+      alert("Please fill the inputs.");
     }
   };
-*/
   return (
     <>
       <div className={style.div}>
@@ -41,7 +71,7 @@ const NewPost = (props) => {
           your own post!
         </h1>
 
-        <form /*onSubmit={formSubmitHandler} */ className={style.form}>
+        <form onSubmit={formSubmitHandler} className={style.form}>
           <h2 className={style.h2}>Type your information here:</h2>
           <label>Name</label>
           <input
@@ -49,9 +79,9 @@ const NewPost = (props) => {
             placeholder="Text here..."
             className={style.input}
             name="username"
-            /* value={username}
-            ref={usernameRef}
-            onChange={onChangeUsername}*/
+            value={username}
+            //ref={usernameRef}
+            onChange={onChangeUsername}
           />
 
           <label>E-mail</label>
@@ -59,8 +89,8 @@ const NewPost = (props) => {
             type="email"
             placeholder="Email here..."
             className={style.input}
-            /* value={email}
-            onChange={onChangeEmail}*/
+            value={email}
+            onChange={onChangeEmail}
           />
 
           <h2 className={style.h2}>Write your post here:</h2>
@@ -69,9 +99,9 @@ const NewPost = (props) => {
             type="text"
             placeholder="Header here..."
             className={style.header}
-            /* ref={headerRef}
+            // ref={headerRef}
             value={header}
-            onChange={onChangeHeader}*/
+            onChange={onChangeHeader}
             name="header"
           />
           <label>Content</label>
@@ -79,19 +109,19 @@ const NewPost = (props) => {
             type="text"
             placeholder="Content here..."
             className={style.content}
-            /* ref={contentRef}
+            // ref={contentRef}
             value={content}
-            onChange={onChangeContent}*/
+            onChange={onChangeContent}
           />
 
           <button
             type="submit"
-            /* onClick={formSubmitHandler}*/
+            // onClick={formSubmitHandler}
             className={style.button}
           >
-            <Link to="/posts" className={style.link}>
-              Post Now
-            </Link>
+            {/*<Link to="/posts" className={style.link} type="submit">*/}
+            Post Now
+            {/*</Link> */}
           </button>
         </form>
       </div>
