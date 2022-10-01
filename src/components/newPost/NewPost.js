@@ -89,7 +89,9 @@ const NewPost = (props) => {
             /* onClick={formSubmitHandler}*/
             className={style.button}
           >
-            <Link to="/posts">Post Now</Link>
+            <Link to="/posts" className={style.link}>
+              Post Now
+            </Link>
           </button>
         </form>
       </div>

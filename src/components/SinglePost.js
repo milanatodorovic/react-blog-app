@@ -78,6 +78,9 @@ const SinglePost = (props) => {
     posts.filter((post) => {
       return post.id !== id;
     });
+    localStorage.removeItem(post.id);
+
+    return <p className="deleteMessage">This post has been deleted.</p>;
   };
   const deletePost = () => {
     dispatch({
@@ -120,9 +123,6 @@ const SinglePost = (props) => {
               </button>
             </div>
             <button onClick={deletePost}>Delete</button>
-            <div>
-              <button /*onClick={editHandler}*/>Edit</button>
-            </div>
           </div>
         </>
         {/*) : (

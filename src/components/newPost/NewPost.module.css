@@ -76,7 +76,6 @@
   border-radius: 7px;
 }
 
-/* CSS */
 .button {
   align-items: center;
   background-color: #0a66c2;
@@ -127,4 +126,14 @@
   cursor: not-allowed;
   background: rgba(0, 0, 0, 0.08);
   color: rgba(0, 0, 0, 0.3);
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, 0.7);
 }
