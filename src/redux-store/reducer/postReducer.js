@@ -5,16 +5,11 @@ import {
   INCREMENT_ANGRY,
   INCREMENT_CONFUSED,
   INCREMENT_SAD,
+  ADD_NEW_POST,
 } from "../action/index";
 
 const initalState = {
   posts: [],
-  reactions: {
-    happy: 0,
-    sad: 0,
-    angry: 0,
-    confused: 0,
-  },
 };
 
 const postReducer = (state = initalState, action) => {
@@ -27,47 +22,99 @@ const postReducer = (state = initalState, action) => {
     case DELETE_POST:
       return {
         ...state,
-        posts: state.posts.filter((post) => post.id !== action.payload),
+        posts: state.posts.filter((i) => i.id !== action.payload.id),
+      };
+
+    case ADD_NEW_POST:
+      const newPostsAdder = [
+        ...state.posts,
+        state.posts.unshift(action.payload),
+      ];
+
+      return {
+        ...state,
+        posts: newPostsAdder,
       };
 
     case INCREMENT_HAPPY:
-      return state.posts.map((post) => {
+      const newPosts = state.posts.map((post) => {
         if (action.payload.postId !== post.id) {
           return post;
         } else {
           return {
-            ...state,
-            reactions: state.reactions.happy + action.payload,
+            ...post,
+            reactions: {
+              ...post.reactions,
+              happy: post.reactions.happy + 1,
+            },
           };
         }
       });
 
+      return {
+        ...state,
+        posts: newPosts,
+      };
+
     case INCREMENT_ANGRY:
-      return state.posts.map((post) => {
+      const angryHandler = state.posts.map((post) => {
         if (action.payload.postId !== post.id) {
           return post;
         } else {
-          return state.reactions.angry + action.payload;
+          return {
+            ...post,
+            reactions: {
+              ...post.reactions,
+              angry: post.reactions.angry + 1,
+            },
+          };
         }
       });
+
+      return {
+        ...state,
+        posts: angryHandler,
+      };
 
     case INCREMENT_SAD:
-      return state.posts.map((post) => {
+      const sadHandler = state.posts.map((post) => {
         if (action.payload.postId !== post.id) {
           return post;
         } else {
-          return state.reactions.sad + action.payload;
+          return {
+            ...post,
+            reactions: {
+              ...post.reactions,
+              sad: post.reactions.sad + 1,
+            },
+          };
         }
       });
 
+      return {
+        ...state,
+        posts: sadHandler,
+      };
+
     case INCREMENT_CONFUSED:
-      return state.posts.map((post) => {
+      const confusedHandler = state.posts.map((post) => {
         if (action.payload.postId !== post.id) {
           return post;
         } else {
-          return state.reactions.confused + action.payload;
+          return {
+            ...post,
+            reactions: {
+              ...post.reactions,
+              confused: post.reactions.confused + 1,
+            },
+          };
         }
       });
+
+      return {
+        ...state,
+        posts: confusedHandler,
+      };
     default:
       return state;
   }

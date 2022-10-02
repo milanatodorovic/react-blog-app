@@ -1,68 +1,125 @@
 import style from "../newPost/NewPost.module.css";
-import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 import { v4 as uuid } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_NEW_POST } from "../../redux-store/action";
 const NewPost = (props) => {
-  const [header, setHeader] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  /*  const headerRef = useRef();
-  const contentRef = useRef();
-  const usernameRef = useRef();*/
+  // const [newPost, setNewPost] = useState(getNewPosts());
 
-  const onChangeHeader = (e) => {
-    setHeader(e.target.value);
+  const posts = useSelector((state) => state.posts);
+
+  const dispatch = useDispatch();
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
   };
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
   };
-  const onChangeContent = (e) => {
-    setContent(e.target.value);
+  const onChangeBody = (e) => {
+    setBody(e.target.value);
   };
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
 
-  const [newPost, setNewPost] = useState(getNewPosts());
-
-  function getNewPosts() {
+  /*function getNewPosts() {
     const temp = localStorage.getItem("newPost");
     const savedNewPosts = JSON.parse(temp);
+
     return savedNewPosts || [];
   }
   useEffect(() => {
     const temp = JSON.stringify(newPost);
-    localStorage.setItem("newPost", temp);
-  }, [newPost]);
+    localStorage.setItem("newPost", temp);*/
 
-  const addNewPostsHandler = ({ username, email, header, content }) => {
+  /*const allPostsTogether = posts.map((item) => ({
+      ...item,
+      newPost,
+    }));
+
+    if (allPostsTogether) {
+      dispatch({
+        type: ADD_NEW_POST,
+        payload: allPostsTogether,
+      });
+    } else {
+      console.log("neuspjesno");
+    }
+  }, [newPost]);
+*/
+  const addNewPostsHandler = ({ username, email, title, body }) => {
     const newWritenPost = {
-      id: uuid(),
+      id: Date.now(),
       username: username,
       email: email,
-      header: header,
-      content: content,
+      title: title,
+      body: body,
       date: "25.9.2022.",
+      reactions: {
+        happy: 0,
+        angry: 0,
+        confused: 0,
+        sad: 0,
+      },
+      // author: "Milana",
+      // gmail: "email adresa",
     };
 
-    setNewPost([...newPost, newWritenPost]);
+    dispatch({
+      type: ADD_NEW_POST,
+      payload: newWritenPost,
+    });
+    console.log("uspjesno", posts);
+    /*const allPostsTogether = posts.unshift(newWritenPost);
+
+    if (allPostsTogether) {
+      dispatch({
+        type: ADD_NEW_POST,
+        payload: posts.unshift(newWritenPost),
+      });
+      console.log("uspjesno", posts);
+    } else {
+      console.log("neuspjesno");
+    }*/
+    // posts.push(newWritenPost);
+    //setNewPost([...newPost, newWritenPost]);
   };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if ((username, email, header, content)) {
-      addNewPostsHandler({ username, email, header, content });
-      setHeader("");
+    if ((username, email, title, body)) {
+      addNewPostsHandler({ username, email, title, body });
+      setTitle("");
       setUsername("");
       setEmail("");
-      setContent("");
-      console.log("pojedinacno:", username, email, header, content);
-      console.log("newPost state:", newPost);
+      setBody("");
+      console.log("pojedinacno:", username, email, title, body);
+      //console.log("newPost state:", newPost);
     } else {
       alert("Please fill the inputs.");
     }
   };
+
+  /*const allPostsTogether = posts.map((item) => ({
+    ...item,
+    newP: posts + newPost,
+  }));
+
+  if (allPostsTogether) {
+    dispatch({
+      type: ADD_NEW_POST,
+      payload: allPostsTogether,
+    });
+    console.log("uspjesno", posts);
+  } else {
+    console.log("neuspjesno");
+  }*/
   return (
     <>
       <div className={style.div}>
@@ -78,9 +135,8 @@ const NewPost = (props) => {
             type="text"
             placeholder="Text here..."
             className={style.input}
-            name="username"
+            name="title"
             value={username}
-            //ref={usernameRef}
             onChange={onChangeUsername}
           />
 
@@ -94,31 +150,27 @@ const NewPost = (props) => {
           />
 
           <h2 className={style.h2}>Write your post here:</h2>
-          <label>Header</label>
+          <label>Title</label>
           <input
             type="text"
-            placeholder="Header here..."
-            className={style.header}
-            // ref={headerRef}
-            value={header}
-            onChange={onChangeHeader}
-            name="header"
+            placeholder="title here..."
+            className={style.title}
+            // ref={titleRef}
+            value={title}
+            onChange={onChangeTitle}
+            name="title"
           />
           <label>Content</label>
           <input
             type="text"
-            placeholder="Content here..."
-            className={style.content}
-            // ref={contentRef}
-            value={content}
-            onChange={onChangeContent}
+            placeholder="body here..."
+            className={style.body}
+            // ref={bodyRef}
+            value={body}
+            onChange={onChangeBody}
           />
 
-          <button
-            type="submit"
-            // onClick={formSubmitHandler}
-            className={style.button}
-          >
+          <button type="submit" className={style.button}>
             {/*<Link to="/posts" className={style.link} type="submit">*/}
             Post Now
             {/*</Link> */}

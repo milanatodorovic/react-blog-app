@@ -1,37 +1,11 @@
-/*export const happyIncrement = () => {
-  return {
-    type: "HAPPY",
-  };
-};
-
-export const sadIncrement = () => {
-  return {
-    type: "SAD",
-  };
-};
-
-export const confusedIncrement = () => {
-  return {
-    type: "CONFUSED",
-  };
-};
-
-export const angryIncrement = () => {
-  return {
-    type: "ANGRY",
-  };
-};
-*/
-
-import axios from "axios";
-
 export const SET_ALL_POSTS = "SET_ALL_POSTS";
 export const INCREMENT_HAPPY = "INCREMENT_HAPPY";
 export const INCREMENT_SAD = "INCREMENT_SAD";
 export const INCREMENT_ANGRY = "INCREMENT_ANGRY";
 export const INCREMENT_CONFUSED = "INCREMENT_CONFUSED";
 export const DELETE_POST = "DELETE_POST";
-
+export const ADD_NEW_POST = "ADD_NEW_POST";
+/*
 export const SetAllPosts = () => {
   try {
     return async (dispatch) => {
@@ -61,6 +35,14 @@ export const SetAllPosts = () => {
     console.log("greska u catchu");
   }
 };
+*/
+
+/*export const addNewPost = {
+  type: ADD_NEW_POST,
+  //payload: newPost,
+};
+export default addNewPost;*/
+
 /*
 export const incrementHappy = (n) => {
   return {

@@ -9,7 +9,7 @@ const SinglePost = (props) => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [user, setUser] = useState([]);
-  const [view, setView] = useState(true);
+
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   console.log(post.id);
@@ -37,7 +37,7 @@ const SinglePost = (props) => {
     fetchUser();
   }, [id]);
 
-  /* const DeletePostHandler = (id) => {
+  /*const DeletePostHandler = (id) => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
       method: "DELETE",
     }).then((result) => {
@@ -46,7 +46,7 @@ const SinglePost = (props) => {
       });
     });
   };
-*/
+
   /*  useEffect(() => {
     deleteHandler();
   });
@@ -70,10 +70,10 @@ const SinglePost = (props) => {
       })
     })*/
 
-  /* const backToHomeHandler = () => {
+  const backToHomeHandler = () => {
     window.scrollTo(0, 0);
-  };*/
-
+  };
+  /*
   const deleteHandler = (id) => {
     posts.filter((post) => {
       return post.id !== id;
@@ -81,18 +81,19 @@ const SinglePost = (props) => {
     localStorage.removeItem(post.id);
 
     return <p className="deleteMessage">This post has been deleted.</p>;
-  };
-  const deletePost = () => {
+  };*/
+  const deletePost = (index) => {
     dispatch({
       type: DELETE_POST,
       payload: post.id,
     });
+
+    return <p className="deleteMessage">This post has been deleted.</p>;
   };
 
   return (
     <>
       <div className="single-post-compt">
-        {/* {view === true && post !== null ? (*/}
         <>
           <h1>{post.title}</h1>
 
@@ -116,18 +117,18 @@ const SinglePost = (props) => {
             <span>{user.email}</span>
           </div>
 
-          <div>
-            <div>
-              <button /*onClick={backToHomeHandler}*/>
-                <Link to={`/posts`}>Back to Home</Link>
-              </button>
-            </div>
-            <button onClick={deletePost}>Delete</button>
+          <div className="bttns-wrapper">
+            <button className="bttns" onClick={backToHomeHandler}>
+              <Link className="bttnslink" to={`/posts`}>
+                Home
+              </Link>
+            </button>
+
+            <button className="button-17" onClick={deletePost}>
+              Delete
+            </button>
           </div>
         </>
-        {/*) : (
-        <p className="deleteMessage">This post has been deleted. </p>
-         )}*/}
       </div>
     </>
   );

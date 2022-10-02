@@ -45,7 +45,7 @@
   border-radius: 7px;
 }
 
-.header {
+.title {
   height: 50px;
 
   margin-left: 20px;
@@ -61,7 +61,7 @@
   border-radius: 7px;
 }
 
-.content {
+.body {
   height: 100px;
   margin-left: 20px;
 
