@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import cryingGif from "../../assets/crying.gif";
 import happyGif from "../../assets/love.gif";
 import confusedGif from "../../assets/puzzled.gif";
 import silentGif from "../../assets/silent.gif";
-import axiosInstance from "../../api/axios";
 
 import "./Main.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +14,9 @@ import {
 } from "../../redux-store/action/index";
 
 const Post = (props) => {
-  //const [post, setPost] = useState([]);
-  // const [users, setUsers] = useState([]);
-
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+
   const incrementHappyHandler = (id) => {
     dispatch({
       type: INCREMENT_HAPPY,
@@ -56,22 +53,6 @@ const Post = (props) => {
     });
   };
 
-  /*const fetchUsersHandler = async (e) => {
-    try {
-      const response = await axiosInstance.get("/users");
-      //console.log(response);
-
-      setUsers(response.data[userId].name);
-    } catch (error) {
-      // console.log(error);
-      // console.log("greska u catchu");
-    }
-  };
-
-  fetchUsersHandler();
-
-  const { userId } = props;*/
-
   const topOfPage = () => {
     window.scrollTo(0, 0);
   };
@@ -81,15 +62,19 @@ const Post = (props) => {
       <div className="post-wrapper">
         <div className="single-post">
           <div className="user-time">
-            <span className="user"> {/*props.*/ props.author}</span>
+            <span className="user"> {props.author}</span>
             <span className="time">{props.date}</span>
           </div>
 
           <h1 className="title">{props.title}</h1>
           <p>{props.data}</p>
           <div className="InfoRed">
-            <button className="button-48" onClick={topOfPage}>
-              <Link to={`/posts/${props.id}`} className="text">
+            <button className="button-48">
+              <Link
+                to={`/posts/${props.id}`}
+                className="text"
+                onClick={topOfPage}
+              >
                 Read More
               </Link>
             </button>

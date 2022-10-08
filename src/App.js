@@ -7,51 +7,56 @@ import SinglePost from "./components/SinglePost";
 import Posts from "./components/Posts/Posts";
 import { axiosInstance } from "./api/axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_ALL_POSTS } from "./redux-store/action/index";
 import axios from "axios";
 
 function App(props) {
-  /*const [users, setUsers] = useState([]);
   const posts = useSelector((state) => state.posts);
-
-  const fetchUsersHandler = async () => {
-    try {
-      const response = await axiosInstance.get("/users");
-      console.log(response);
-      //[posts.userId]
-      setUsers(response.data.name);
-      console.log("users:", users);
-    } catch (error) {
-      // console.log(error);
-      console.log("greska u catchu");
-    }
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchUsersHandler();
-  }, []);
+    const fetchPosts = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts ",
+        { method: "GET" }
+      );
+      const posts = await response.json();
+      const postsWithDate = posts.map((item) => ({
+        ...item,
+        date: "25. September 2022.",
+        reactions: {
+          happy: 0,
+          sad: 0,
+          angry: 0,
+          confused: 0,
+        },
+        author: "Milana Todorović",
+        email: "milana2005@gmail.com",
+      }));
+      console.log(posts);
+      if (postsWithDate) {
+        dispatch({
+          type: SET_ALL_POSTS,
+          payload: postsWithDate,
+        });
+      } else {
+        console.log("nije se fetchovalo");
+      }
+    };
+    fetchPosts();
+  }, [dispatch]);
 
-  /*
-  const DeletePostHandler = (id) => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    }).then((result) => {
-      result.json().then((response) => {
-        fetchPostsHandler();
-      });
-    });
-  };
-
+  //local storage for posts
+  function getPosts() {
+    const temp = localStorage.getItem("posts");
+    const savedPosts = JSON.parse(temp);
+    return savedPosts || [];
+  }
   useEffect(() => {
-    DeletePostHandler();
-  }, []);
-
-  const DeletePostHandler = () => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    }).then(() => console.log("Delete successful"));
-  };
-*/
+    const temp = JSON.stringify(posts);
+    localStorage.setItem("posts", temp);
+  }, [posts]);
 
   return (
     <BrowserRouter>
@@ -66,28 +71,10 @@ function App(props) {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Posts /*users={users}*/ />}></Route>
-        <Route
-          path="/posts"
-          element={
-            <Posts
-            /* users={
-                users
-              } /*fetchPostsHandler={fetchPostsHandler} posts={posts}*/
-            />
-          }
-        ></Route>
-        <Route
-          path="/newpost"
-          element={<NewPost /*addNewPosts={addNewPosts}*/ />}
-        ></Route>
-        <Route
-          path="/posts/:id"
-          element={
-            <SinglePost /*fetchPostsHandler={fetchPostsHandler} posts={posts}*/
-            />
-          }
-        />
+        <Route path="/" element={<Posts />}></Route>
+        <Route path="/posts" element={<Posts />}></Route>
+        <Route path="/newpost" element={<NewPost />}></Route>
+        <Route path="/posts/:id" element={<SinglePost />} />
       </Routes>
       <div className="App">
         <footer>

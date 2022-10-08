@@ -1,26 +1,20 @@
 import style from "../newPost/NewPost.module.css";
-import { useState, useEffect } from "react";
-
-import { v4 as uuid } from "uuid";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_NEW_POST } from "../../redux-store/action";
+import { useNavigate } from "react-router-dom";
 const NewPost = (props) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  // const [newPost, setNewPost] = useState(getNewPosts());
-
   const posts = useSelector((state) => state.posts);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
   };
-  const onChangeUsername = (e) => {
-    setUsername(e.target.value);
-  };
+
   const onChangeBody = (e) => {
     setBody(e.target.value);
   };
@@ -28,47 +22,22 @@ const NewPost = (props) => {
     setEmail(e.target.value);
   };
 
-  /*function getNewPosts() {
-    const temp = localStorage.getItem("newPost");
-    const savedNewPosts = JSON.parse(temp);
-
-    return savedNewPosts || [];
-  }
-  useEffect(() => {
-    const temp = JSON.stringify(newPost);
-    localStorage.setItem("newPost", temp);*/
-
-  /*const allPostsTogether = posts.map((item) => ({
-      ...item,
-      newPost,
-    }));
-
-    if (allPostsTogether) {
-      dispatch({
-        type: ADD_NEW_POST,
-        payload: allPostsTogether,
-      });
-    } else {
-      console.log("neuspjesno");
-    }
-  }, [newPost]);
-*/
   const addNewPostsHandler = ({ username, email, title, body }) => {
     const newWritenPost = {
       id: Date.now(),
       username: username,
-      email: email,
+      //email: email,
       title: title,
       body: body,
-      date: "25.9.2022.",
+      date: "25. September 2022.",
       reactions: {
         happy: 0,
         angry: 0,
         confused: 0,
         sad: 0,
       },
-      // author: "Milana",
-      // gmail: "email adresa",
+      author: "Milana Todorović",
+      email: "email adresa",
     };
 
     dispatch({
@@ -76,50 +45,19 @@ const NewPost = (props) => {
       payload: newWritenPost,
     });
     console.log("uspjesno", posts);
-    /*const allPostsTogether = posts.unshift(newWritenPost);
-
-    if (allPostsTogether) {
-      dispatch({
-        type: ADD_NEW_POST,
-        payload: posts.unshift(newWritenPost),
-      });
-      console.log("uspjesno", posts);
-    } else {
-      console.log("neuspjesno");
-    }*/
-    // posts.push(newWritenPost);
-    //setNewPost([...newPost, newWritenPost]);
   };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if ((username, email, title, body)) {
-      addNewPostsHandler({ username, email, title, body });
+    if ((email, title, body)) {
+      addNewPostsHandler({ email, title, body });
       setTitle("");
-      setUsername("");
+
       setEmail("");
       setBody("");
-      console.log("pojedinacno:", username, email, title, body);
-      //console.log("newPost state:", newPost);
-    } else {
-      alert("Please fill the inputs.");
     }
   };
 
-  /*const allPostsTogether = posts.map((item) => ({
-    ...item,
-    newP: posts + newPost,
-  }));
-
-  if (allPostsTogether) {
-    dispatch({
-      type: ADD_NEW_POST,
-      payload: allPostsTogether,
-    });
-    console.log("uspjesno", posts);
-  } else {
-    console.log("neuspjesno");
-  }*/
   return (
     <>
       <div className={style.div}>
@@ -129,17 +67,6 @@ const NewPost = (props) => {
         </h1>
 
         <form onSubmit={formSubmitHandler} className={style.form}>
-          <h2 className={style.h2}>Type your information here:</h2>
-          <label>Name</label>
-          <input
-            type="text"
-            placeholder="Text here..."
-            className={style.input}
-            name="title"
-            value={username}
-            onChange={onChangeUsername}
-          />
-
           <label>E-mail</label>
           <input
             type="email"
@@ -170,10 +97,12 @@ const NewPost = (props) => {
             onChange={onChangeBody}
           />
 
-          <button type="submit" className={style.button}>
-            {/*<Link to="/posts" className={style.link} type="submit">*/}
+          <button
+            type="submit"
+            className={style.button}
+            onClick={() => navigate(-1)}
+          >
             Post Now
-            {/*</Link> */}
           </button>
         </form>
       </div>

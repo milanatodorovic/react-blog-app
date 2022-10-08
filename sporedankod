@@ -27,3 +27,24 @@
       console.log("DOSLO JE DO GRESKE");
     }
   };*/
+
+
+
+
+
+
+  /*const fetchUsersHandler = async (e) => {
+    try {
+      const response = await axiosInstance.get("/users");
+      //console.log(response);
+
+      setUsers(response.data[userId].name);
+    } catch (error) {
+      // console.log(error);
+      // console.log("greska u catchu");
+    }
+  };
+
+  fetchUsersHandler();
+
+  const { userId } = props;*/
