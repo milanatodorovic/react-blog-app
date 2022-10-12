@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const NewPost = (props) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [email, setEmail] = useState("");
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,15 +17,11 @@ const NewPost = (props) => {
   const onChangeBody = (e) => {
     setBody(e.target.value);
   };
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
 
-  const addNewPostsHandler = ({ username, email, title, body }) => {
+  const addNewPostsHandler = ({ username, title, body }) => {
     const newWritenPost = {
       id: Date.now(),
       username: username,
-      //email: email,
       title: title,
       body: body,
       date: "25. September 2022.",
@@ -37,7 +32,7 @@ const NewPost = (props) => {
         sad: 0,
       },
       author: "Milana Todorović",
-      email: "email adresa",
+      email: "milana2005@gmail.com",
     };
 
     dispatch({
@@ -49,11 +44,9 @@ const NewPost = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if ((email, title, body)) {
-      addNewPostsHandler({ email, title, body });
+    if ((title, body)) {
+      addNewPostsHandler({ title, body });
       setTitle("");
-
-      setEmail("");
       setBody("");
     }
   };
@@ -67,15 +60,6 @@ const NewPost = (props) => {
         </h1>
 
         <form onSubmit={formSubmitHandler} className={style.form}>
-          <label>E-mail</label>
-          <input
-            type="email"
-            placeholder="Email here..."
-            className={style.input}
-            value={email}
-            onChange={onChangeEmail}
-          />
-
           <h2 className={style.h2}>Write your post here:</h2>
           <label>Title</label>
           <input

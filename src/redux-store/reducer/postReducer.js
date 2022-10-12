@@ -1,6 +1,5 @@
 import {
   SET_ALL_POSTS,
-  DELETE_POST,
   INCREMENT_HAPPY,
   INCREMENT_ANGRY,
   INCREMENT_CONFUSED,
@@ -18,12 +17,6 @@ const postReducer = (state = initalState, action) => {
       return {
         ...state,
         posts: action.payload,
-      };
-
-    case DELETE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter((post) => post.id !== action.payload.id),
       };
 
     case ADD_NEW_POST:
